@@ -8,21 +8,9 @@ from plant_management import plants_bp
 print("Package: ", __package__)
 print("Name: ", __name__)
 
-
 app = Flask(__name__)
 
-#TBD Changed the SQLALCHEMY_DATABASE_URI to use SQLite instead of SQL Server only for coworking
-"""
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    'mssql+pyodbc://(LocalDb)\\MSSQLLocalDB/PflanzenMonitor'
-    '?driver=ODBC+Driver+17+for+SQL+Server'
-)
-"""
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plantbuddy.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'supersecretkey'
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'supersecretkey'
 
@@ -42,10 +30,10 @@ def send_email_reminder(task):
 
 db.init_app(app)
 
-# Registriere das Blueprint
+# Register the blueprint
 app.register_blueprint(plants_bp, url_prefix='/plants')
 
-# Initialisiere die Datenbanktabellen
+# Initialize the database tables
 with app.app_context():
     db.create_all()
 
@@ -155,7 +143,7 @@ def send_reminders():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("home.html")
 
 @app.route("/home")
 def home():
