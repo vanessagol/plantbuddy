@@ -1,0 +1,148 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("{{ url_for('static', filename='background_4pot.jpg') }}") no-repeat center center/cover;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #7c993c;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(to right, #EEE8DC, #ffffff);
+    text-align: center;
+}
+
+.hero .content {
+    max-width: 35%;
+    margin-right: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.hero p {
+    margin: 1rem 0;
+    color: #666;
+    font-size: 1.25rem;
+}
+
+.hero .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #7c993c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: #57662f; /* Darker shade of green */
+}
+
+.hero .image {
+    max-width: 40%;
+}
+
+.hero .image img {
+    width: 100%;
+}
+
+.features {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: url("{{ url_for('static', filename='background_4pot.jpg') }}") no-repeat center center/cover; /* Background image */
+}
+
+.features h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.feature {
+    max-width: 25%;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.feature img {
+    max-width: 100px;
+    margin-bottom: 1rem;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #666;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #7c993c;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

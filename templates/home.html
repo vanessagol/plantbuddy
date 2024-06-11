@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+    <header>
+        <nav>
+            <div class="logo">PlantBuddy</div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="{{ url_for('plants') }}">Plants</a></li>
+                <li><a href="{{ url_for('add_plant') }}">Add Plant</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="content">
+                <h1>Sorge für deine Pflanzen wie ein Profi!</h1>
+                <p>Professionelle Pflanzenpflege direkt zur Hand: Gieß-Erinnerungen, Pflanzenidentifikation und eine weltweite Gemeinschaft von Pflanzenliebhabern.</p>
+                <a href="{{ url_for('register') }}" class="btn">Register now</a>
+            </div>
+            <div class="image">
+                <img src="{{ url_for('static', filename='plants.jpg') }}" alt="Plant with Sensor">
+            </div>
+        </section>
+        <section class="features">
+            <h2>Take the guesswork out of plant care for students!</h2>
+            <div class="features-container">
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='icon1.png') }}" alt="Identify, care, and grow">
+                    <h3>Identify, care, and grow</h3>
+                    <p>Flora can identify over 50+ plants
+                        , and give you care tips and typische Krankheiten.</p>
+                </div>
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='icon2.png') }}" alt="A blooming community">
+                    <h3>E-Mail reminders</h3>
+                    <p>Erinnert per E-Mail an das Gießen und das Düngen.</p>
+                </div>
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='icon3.png') }}" alt="Get rewarded for your green thumbs">
+                    <h3>A blooming community</h3>
+                    <p>For every problem we also have our contact us page to help you with every need.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>PlantBuddy - Your plant care assistant!</p>
+    </footer>
+{% endblock content %}

@@ -6,10 +6,18 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 
+#TBD Changed the SQLALCHEMY_DATABASE_URI to use SQLite instead of SQL Server only for coworking
+"""
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     'mssql+pyodbc://(LocalDb)\\MSSQLLocalDB/PflanzenMonitor'
     '?driver=ODBC+Driver+17+for+SQL+Server'
 )
+"""
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plantbuddy.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'supersecretkey'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'supersecretkey'
 
@@ -177,8 +185,12 @@ def send_reminders():
     return redirect(url_for("tasks"))
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
+
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 if __name__ == "__main__":
     with app.app_context():
