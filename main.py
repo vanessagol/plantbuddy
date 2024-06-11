@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
+from models import User, Plant, CareTask, db
+from plant_management import plants_bp
+
+print("Package: ", __package__)
+print("Name: ", __name__)
+
 
 app = Flask(__name__)
 
@@ -35,50 +40,14 @@ def send_email_reminder(task):
     msg.body = f"Reminder: {task.task_type} your plant {task.plant.name} on {task.task_date.strftime('%Y-%m-%d')}."
     mail.send(msg)
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
-# Modell für Benutzer
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
+# Registriere das Blueprint
+app.register_blueprint(plants_bp, url_prefix='/plants')
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-    
-    def __repr__(self):
-            return f'<User {self.username}>'
-
-# Modell für Pflanzen
-class Plant(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    location = db.Column(db.String(200), nullable=False)
-    watering_frequency = db.Column(db.Integer, nullable=False)  # in Tagen
-    fertilizing_frequency = db.Column(db.Integer, nullable=False)  # in Tagen
-    common_issues = db.Column(db.String(500), nullable=True)
-
-    def __repr__(self):
-        return f'<Plant {self.name}>'
-
-# Modell für Pflegeaufgaben
-class CareTask(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    plant_id = db.Column(db.Integer, db.ForeignKey('plant.id'), nullable=False)
-    task_type = db.Column(db.String(50), nullable=False)  # 'Water' or 'Fertilize'
-    task_date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
-    is_completed = db.Column(db.Boolean, default=False)
-
-    plant = db.relationship('Plant', backref=db.backref('care_tasks', lazy=True))
-
-    def __repr__(self):
-        return f'<CareTask {self.task_type} for {self.plant.name}>'
-
+# Initialisiere die Datenbanktabellen
+with app.app_context():
+    db.create_all()
 
 @app.route("/plants")
 def plants():
@@ -108,36 +77,36 @@ def add_plant():
 
     return render_template("add_plant.html")
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == "POST":
-        username = request.form["username"]
-        email = request.form["email"]
-        password = request.form["password"]
-        
-        if User.query.filter_by(username=username).first():
-            flash("Username already exists!")
-            return redirect(url_for("register"))
-        
-        if User.query.filter_by(email=email).first():
-            flash("Email already registered!")
-            return redirect(url_for("register"))
-        
-        new_user = User(username=username, email=email)
-        new_user.set_password(password)
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email address already exists!")
+            return redirect(url_for('register'))
+
+        new_user = User(
+            username=username,
+            email=email,
+            password=generate_password_hash(password, method='sha256')
+        )
         db.session.add(new_user)
         db.session.commit()
-        flash("Registration successful!")
-        return redirect(url_for("login"))
+        flash("Registration successful! Please login.")
+        return redirect(url_for('login'))
 
-    return render_template("register.html")
+    return render_template('register.html')
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        
+
         user = User.query.filter_by(email=email).first()
         if user is None or not user.check_password(password):
             flash("Invalid email or password!")
