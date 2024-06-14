@@ -1,5 +1,12 @@
-{% extends "layout.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Plantbuddy</title>
+</head>
+<body>
     <header>
         <nav>
             <div class="logo">PlantBuddy</div>
@@ -20,27 +27,26 @@
                 <a href="{{ url_for('register') }}" class="btn">Register now</a>
             </div>
             <div class="image">
-                <img src="{{ url_for('static', filename='plants.jpg') }}" alt="Plant with Sensor">
+                <img src="{{ url_for('static', filename='images/Panel_Indoor_Plants.jpg') }}" alt="Plant with Sensor">
             </div>
         </section>
         <section class="features">
             <h2>Take the guesswork out of plant care for students!</h2>
             <div class="features-container">
                 <div class="feature">
-                    <img src="{{ url_for('static', filename='icon1.png') }}" alt="Identify, care, and grow">
+                    <img src="{{ url_for('static', filename='images/icons8-search-96.png') }}" alt="Identify">
                     <h3>Identify, care, and grow</h3>
-                    <p>Flora can identify over 50+ plants
-                        , and give you care tips and typische Krankheiten.</p>
+                    <p>PlantBuddy kann über 50 Pflanzenarten identifizieren und dir Pflegehinweise sowie typische Krankheiten aufzeigen.</p>
                 </div>
                 <div class="feature">
-                    <img src="{{ url_for('static', filename='icon2.png') }}" alt="A blooming community">
+                    <img src="{{ url_for('static', filename='images/icons8-add-reminder-96.png') }}" alt="E-Mail reminders">
                     <h3>E-Mail reminders</h3>
-                    <p>Erinnert per E-Mail an das Gießen und das Düngen.</p>
+                    <p>Erhalte E-Mail-Erinnerungen zum Gießen und Düngen deiner Pflanzen.</p>
                 </div>
                 <div class="feature">
-                    <img src="{{ url_for('static', filename='icon3.png') }}" alt="Get rewarded for your green thumbs">
+                    <img src="{{ url_for('static', filename='images/icons8-contact-us-96.png') }}" alt="Contact us">
                     <h3>A blooming community</h3>
-                    <p>For every problem we also have our contact us page to help you with every need.</p>
+                    <p>Bei Problemen hilft dir unsere Kontaktseite weiter.</p>
                 </div>
             </div>
         </section>
@@ -48,4 +54,6 @@
     <footer>
         <p>PlantBuddy - Your plant care assistant!</p>
     </footer>
-{% endblock content %}
+
+</body>
+</html>

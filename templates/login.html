@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='authStyles.css') }}">
     <title>Login</title>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='images/Hexagon_Wall Shelves_Plant.jpg') }}") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -25,9 +36,6 @@
                     <a href="{{ url_for('register') }}">Sign Up</a>
                 </div>
             </form>
-        </div>
-        <div class="login-image">
-            <img src="{{ url_for('static', filename='flower.jpg') }}" alt="Flower">
         </div>
     </div>
 </body>

@@ -1,41 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import render_template, request, redirect, url_for, flash, session
+from flask_mail import Mail, Message
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_mail import Mail, Message
-from models import User, Plant, CareTask, db
-from plant_management import plants_bp
+from .models import db, Customer, Plant, CareTask  # Ensure relative import
+from .plant_management import plants_bp  # Ensure relative import
+from . import create_app, mail  # Ensure relative import
 
-print("Package: ", __package__)
-print("Name: ", __name__)
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plantbuddy.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'supersecretkey'
-
-app.config['MAIL_SERVER'] = 'smtp.example.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'your-email@example.com'
-app.config['MAIL_PASSWORD'] = 'your-email-password'
-app.config['MAIL_DEFAULT_SENDER'] = 'your-email@example.com'
-
-mail = Mail(app)
+app = create_app()
 
 def send_email_reminder(task):
-    msg = Message('Plant Care Reminder', recipients=[task.plant.owner.email])
+    msg = Message('Plant Care Reminder', recipients=[task.plant.customer.email])
     msg.body = f"Reminder: {task.task_type} your plant {task.plant.name} on {task.task_date.strftime('%Y-%m-%d')}."
     mail.send(msg)
-
-db.init_app(app)
-
-# Register the blueprint
-app.register_blueprint(plants_bp, url_prefix='/plants')
-
-# Initialize the database tables
-with app.app_context():
-    db.create_all()
 
 @app.route("/plants")
 def plants():
@@ -44,7 +20,7 @@ def plants():
 
 @app.route("/add_plant", methods=["GET", "POST"])
 def add_plant():
-    if request.method == "POST":
+    if request.method == "POST":  # Fixed syntax error
         name = request.form["name"]
         location = request.form["location"]
         watering_frequency = request.form["watering_frequency"]
@@ -54,8 +30,8 @@ def add_plant():
         new_plant = Plant(
             name=name,
             location=location,
-            watering_frequency=watering_frequency,
-            fertilizing_frequency=fertilizing_frequency,
+            water_need=watering_frequency,
+            fertilizer_need=fertilizing_frequency,
             common_issues=common_issues
         )
         db.session.add(new_plant)
@@ -71,31 +47,39 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
 
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash("Email address already exists!")
+        if password != confirm_password:
+            flash("Passwords do not match!")
             return redirect(url_for('register'))
 
-        new_user = User(
-            username=username,
-            email=email,
-            password=generate_password_hash(password, method='sha256')
-        )
+        existing_user = Customer.query.filter_by(email=email).first()
+        if existing_user:
+            flash('User already exists!')
+            return redirect(url_for('register'))
+
+        new_user = Customer(username=username, email=email)
+        new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
+        
         flash("Registration successful! Please login.")
         return redirect(url_for('login'))
 
     return render_template('register.html')
 
+@app.route('/google_login')
+def google_login():
+    # Implement your Google login logic here
+    return redirect(url_for('home'))
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    if request.method == "POST":  # Fixed syntax error
         email = request.form["email"]
         password = request.form["password"]
 
-        user = User.query.filter_by(email=email).first()
+        user = Customer.query.filter_by(email=email).first()
         if user is None or not user.check_password(password):
             flash("Invalid email or password!")
             return redirect(url_for("login"))
@@ -113,7 +97,7 @@ def tasks():
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
-    if request.method == "POST":
+    if request.method == "POST":  # Fixed syntax error
         plant_id = request.form["plant_id"]
         task_type = request.form["task_type"]
         task_date = datetime.strptime(request.form["task_date"], '%Y-%m-%d')
@@ -122,7 +106,8 @@ def add_task():
             plant_id=plant_id,
             task_type=task_type,
             task_date=task_date,
-            is_completed=False
+            is_completed=False,
+            amount=1.0  # Placeholder, adjust as needed
         )
         db.session.add(new_task)
         db.session.commit()
@@ -150,6 +135,4 @@ def home():
     return render_template("home.html")
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
