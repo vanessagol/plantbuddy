@@ -2,9 +2,9 @@ from flask import render_template, request, redirect, url_for, flash, session
 from flask_mail import Mail, Message
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import db, Customer, Plant, CareTask  # Ensure relative import
-from .plant_management import plants_bp  # Ensure relative import
-from . import create_app, mail  # Ensure relative import
+from .models import db, Customer, Plant, CareTask  # Relative import
+from .plant_management import plants_bp  # Relative import
+from . import create_app, mail  # Relative import
 
 app = create_app()
 
@@ -20,7 +20,7 @@ def plants():
 
 @app.route("/add_plant", methods=["GET", "POST"])
 def add_plant():
-    if request.method == "POST":  # Fixed syntax error
+    if request.method == "POST":
         name = request.form["name"]
         location = request.form["location"]
         watering_frequency = request.form["watering_frequency"]
@@ -75,7 +75,7 @@ def google_login():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":  # Fixed syntax error
+    if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
 
@@ -97,7 +97,7 @@ def tasks():
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
-    if request.method == "POST":  # Fixed syntax error
+    if request.method == "POST":
         plant_id = request.form["plant_id"]
         task_type = request.form["task_type"]
         task_date = datetime.strptime(request.form["task_date"], '%Y-%m-%d')

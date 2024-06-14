@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import db, Plant, CustomerPlant  # Ensure relative import
+from .models import db, Plant, CustomerPlant  # Relative import
 
 plants_bp = Blueprint('plants', __name__)
 
