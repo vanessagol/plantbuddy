@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash, session
-from flask_mail import Mail, Message
+from flask_mail import Message
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db, Customer, Plant, CareTask  # Relative import
