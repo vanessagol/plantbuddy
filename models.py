@@ -26,11 +26,12 @@ class Plant(db.Model):
     __tablename__ = 'plants'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    location = db.Column(db.String(200), nullable=True)
-    water_need = db.Column(db.String(50), nullable=True)
-    fertilizer_need = db.Column(db.String(50), nullable=True)
-    common_issues = db.Column(db.String(500), nullable=True)
-    
+    photo = db.Column(db.String(200), nullable=True)
+    description = db.Column(db.Text, nullable=True)
+    placement = db.Column(db.String(50), nullable=True)  # Partial-shade, bright, sunny
+    water_demand = db.Column(db.String(50), nullable=True)  # Low, medium, high
+    fertilizing = db.Column(db.String(50), nullable=True)  # weekly, monthly, -
+
     customer_plants = db.relationship("CustomerPlant", back_populates="plant")
     care_tasks = db.relationship('CareTask', back_populates='plant')
 
@@ -42,7 +43,6 @@ class CustomerPlant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
     plant_id = db.Column(db.Integer, db.ForeignKey('plants.id'), nullable=False)
-    location = db.Column(db.String(200), nullable=False)
 
     customer = db.relationship("Customer", back_populates="plants")
     plant = db.relationship("Plant", back_populates="customer_plants")

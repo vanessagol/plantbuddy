@@ -1,0 +1,29 @@
+<!-- contact_us.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontaktieren Sie uns</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background: linear-gradient(to right, #EEE8DC, #F3F9E8);">
+    {% include 'header.html' %}
+    <main>
+        <section class="contact-section">
+            <div class="contact-content">
+                <h1>Kontaktieren Sie uns</h1>
+                <p>Kontaktinformationen</p>
+                <p>Fragen? Feedback? Wir möchten alles hören! Senden Sie uns eine Nachricht an <a href="mailto:info@plantbuddy.com">info@plantbuddy.com</a></p>
+                <button onclick="window.location.href='mailto:info@plantbuddy.com'">Mehr erfahren</button>
+            </div>
+            <div class="contact-image">
+                <img src="{{ url_for('static', filename='images/contact_image.jpg') }}" alt="Kontaktieren Sie uns">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 PlantBuddy. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+</html>

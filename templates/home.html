@@ -1,3 +1,4 @@
+<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +8,7 @@
     <title>Plantbuddy</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">PlantBuddy</div>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="{{ url_for('plants') }}">Plants</a></li>
-                <li><a href="{{ url_for('add_plant') }}">Add Plant</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+    {% include 'header.html' %}
     <main>
         <section class="hero">
             <div class="content">
@@ -54,6 +44,5 @@
     <footer>
         <p>PlantBuddy - Your plant care assistant!</p>
     </footer>
-
 </body>
 </html>

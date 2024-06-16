@@ -8,25 +8,12 @@ def plants():
     all_plants = Plant.query.all()
     return render_template("plants.html", plants=all_plants)
 
-@plants_bp.route("/add", methods=["GET", "POST"])
-def add_plant():
-    if request.method == "POST":
-        name = request.form["name"]
-        location = request.form["location"]
-        water_need = request.form["water_need"]
-        fertilizer_need = request.form["fertilizer_need"]
-        common_issues = request.form.get("common_issues")
+@plants_bp.route("/plant/<int:plant_id>")
+def plant_detail(plant_id):
+    plant = Plant.query.get_or_404(plant_id)
+    return render_template("plant_detail.html", plant=plant)
 
-        new_plant = Plant(
-            name=name,
-            location=location,
-            water_need=water_need,
-            fertilizer_need=fertilizer_need,
-            common_issues=common_issues
-        )
-        db.session.add(new_plant)
-        db.session.commit()
-        flash("Plant added successfully!")
-        return redirect(url_for("plants.plants"))
-
-    return render_template("add_plant.html")
+@plants_bp.route("/add_plant/<int:plant_id>")
+def add_plant(plant_id):
+    # Logic to add plant to the user's collection
+    return redirect(url_for('plants.plants'))

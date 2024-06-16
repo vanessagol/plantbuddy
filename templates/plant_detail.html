@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ plant.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='plants.css') }}">
+</head>
+<body>
+    <h1>{{ plant.name }}</h1>
+    <img src="{{ plant.photo }}" alt="{{ plant.name }}">
+    <p>{{ plant.description }}</p>
+    <p><strong>Placement:</strong> {{ plant.placement }}</p>
+    <p><strong>Water Demand:</strong> {{ plant.water_demand }}</p>
+    <p><strong>Fertilizing:</strong> {{ plant.fertilizing }}</p>
+</body>
+</html>
