@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Plants</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='plants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Plants</h1>
+    {% include 'header.html' %}
     <div class="plants-container">
         {% for plant in plants %}
         <div class="plant-card">

@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <title>{{ plant.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='plants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ plant.name }}</h1>
-    <img src="{{ plant.photo }}" alt="{{ plant.name }}">
-    <p>{{ plant.description }}</p>
-    <p><strong>Placement:</strong> {{ plant.placement }}</p>
-    <p><strong>Water Demand:</strong> {{ plant.water_demand }}</p>
-    <p><strong>Fertilizing:</strong> {{ plant.fertilizing }}</p>
+    {% include 'header.html' %}
+    <div class="plant-detail-container">
+        <div class="plant-detail-image">
+            <img src="{{ url_for('static', filename=plant.photo) }}" alt="{{ plant.name }}">
+        </div>
+        <div class="plant-detail-info">
+            <h1>{{ plant.name }}</h1>
+            <p>{{ plant.description }}</p>
+            <p><strong>Placement:</strong> {{ plant.placement }}</p>
+            <p><strong>Water Demand:</strong> {{ plant.water_demand }}</p>
+            <p><strong>Fertilizing:</strong> {{ plant.fertilizing }}</p>
+        </div>
+    </div>
 </body>
 </html>

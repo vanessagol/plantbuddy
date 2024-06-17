@@ -26,4 +26,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    from .plant_management import plants_bp  # Relative import
+    app.register_blueprint(plants_bp, url_prefix='/plants')
+
     return app

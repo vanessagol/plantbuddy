@@ -1,8 +1,8 @@
-body {
+body { 
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: url("{{ url_for('static', filename='images/Potted_herb_plants.jpg') }}") no-repeat center center/cover;
+    background: linear-gradient(to right, #dedfda, #e5e5e5);
     color: #333;
 }
 
@@ -78,7 +78,7 @@ nav ul li a:hover {
 .hero .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background-color: #57662F;
+    background-color: #7c993c;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -211,7 +211,7 @@ footer {
 }
 
 .contact-content a {
-    color: #007BFF;
+    color: #7c993c;
     text-decoration: none;
 }
 

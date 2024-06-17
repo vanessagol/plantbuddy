@@ -1,26 +1,26 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
 .plants-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center; /* Center the container */
+    padding: 20px; /* Add padding to create margin */
 }
 
 .plant-card {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    width: 200px;
+    width: calc(20vw - 40px); /* Adjust width to ensure consistent size */
     position: relative;
     text-align: center;
+    box-sizing: border-box; /* Ensure padding and border are included in the width and height */
 }
 
 .plant-card img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 4 / 5; /* Maintain 4:5 aspect ratio */
     border-radius: 5px;
+    object-fit: cover; /* Ensure image covers the container */
 }
 
 .plant-card h2 {
@@ -44,12 +44,39 @@ body {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
-    background-color: #28a745;
+    background-color: #7c993c;
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
 .button:hover {
-    background-color: #218838;
+    background-color: #3f4a22;
 }
+
+.plant-detail-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start; /* Align items to the start of the container */
+}
+
+.plant-detail-image {
+    flex: 1; /* Take up one part of the available space */
+    max-width: 500px; /* Limit the maximum width */
+}
+
+.plant-detail-info {
+    flex: 2; /* Take up two parts of the available space */
+}
+
+.plant-detail-info h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.plant-detail-info p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
