@@ -14,6 +14,11 @@ def index():
 def home():
     return render_template("home.html")
 
+# @main_bp.route("/blog")
+# def blog():
+#     # posts = BlogPost.query.all()  # Fetch all blog posts from the database
+#     return render_template("blog.html", posts=posts)
+
 @main_bp.route("/contact_us")
 def contact_us():
     return render_template("contact_us.html")

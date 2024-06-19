@@ -10,8 +10,9 @@ body {
 }
 
 .navbar-nav .nav-link.active {
-    color: #fff !important;
-    background-color: #323d19 !important;
+    color: #7C9A38 !important;
+    font-weight: bold;
+    background-color: transparent !important;
 }
 
 header {
