@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Care Reminder</title>
+</head>
+<body>
+    <p>Dear {{ user.username }},</p>
+    <p>This is a friendly reminder to water your plant(s):</p>
+    <ul>
+        {% for plant in plants %}
+        <li>{{ plant.name }} - Water Demand: {{ plant.water_demand }}</li>
+        {% endfor %}
+    </ul>
+    <p>Happy gardening!</p>
+</body>
+</html>

@@ -4,6 +4,14 @@ body {
     padding: 0;
     background: linear-gradient(to right, #dedfda, #e5e5e5);
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar-nav .nav-link.active {
+    color: #fff !important;
+    background-color: #323d19 !important;
 }
 
 header {
@@ -15,47 +23,12 @@ header {
     z-index: 1000;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-}
-
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #7c993c;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    margin-left: 2rem;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #7c993c;
-}
-
 .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 4rem 2rem;
-    background: linear-gradient(to right, #EEE8DC, #F3F9E8);
+    background: linear-gradient(to right, #dedfda, #e5e5e5);
     text-align: left;
 }
 
@@ -154,9 +127,10 @@ footer {
     padding: 1rem;
     background-color: #7c993c;
     color: #fff;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
+    margin-top: auto; /* Push footer to the bottom */
 }
 
 @media (max-width: 768px) {
@@ -191,7 +165,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 2em;
-    background: linear-gradient(to right, #EEE8DC, #F3F9E8);
+    background: linear-gradient(to right, #dedfda, #e5e5e5);
 }
 
 .contact-content {

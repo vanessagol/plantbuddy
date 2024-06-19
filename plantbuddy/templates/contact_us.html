@@ -1,13 +1,13 @@
-<!-- contact_us.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontaktieren Sie uns</title>
+    <title>Contact us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body style="background: linear-gradient(to right, #EEE8DC, #F3F9E8);">
+<body>
     {% include 'header.html' %}
     <main>
         <section class="contact-section">
@@ -22,8 +22,9 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 PlantBuddy. Alle Rechte vorbehalten.</p>
-    </footer>
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
