@@ -1,9 +1,6 @@
-from plantbuddy import create_app, db
-from plantbuddy.db.models import Plant, Customer, BlogPost
 from werkzeug.security import generate_password_hash
+from .db import Plant, Customer, BlogPost, db
 import os
-
-app = create_app()
 
 def populate_db():
     plants_data = [
@@ -243,6 +240,3 @@ def populate_db():
         print("Plants, admin user, and blog post have been added to the database.")
     else:
         print("Database is not empty, skipping population.")
-
-with app.app_context():
-    populate_db()
