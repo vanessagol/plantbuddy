@@ -1,3 +1,9 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
 .plants-container {
     display: flex;
     flex-wrap: wrap;
@@ -48,12 +54,22 @@
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button:hover {
     background-color: #3f4a22;
     color: white;  /* Ensure text color remains white on hover */
+}
+
+.btn-custom {
+    background-color: #7c993c;
+    border-color: #7c993c;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #3f4a22;
+    color: white;
 }
 
 @media (max-width: 1024px) {

@@ -5,11 +5,11 @@ from datetime import datetime
 
 plants_bp = Blueprint('plants', __name__)
 
-@plants_bp.route("/")
+@plants_bp.route("/", methods=["GET", "POST"])
 def plants():
-    search_query = request.args.get('search', '')
+    search_query = request.args.get('search')
     if search_query:
-        all_plants = Plant.query.filter(Plant.name.ilike(f'%{search_query}%')).all()
+        all_plants = Plant.query.filter(Plant.name.like(f'%{search_query}%')).all()
     else:
         all_plants = Plant.query.all()
     
@@ -20,29 +20,15 @@ def plant_detail(plant_id):
     plant = Plant.query.get_or_404(plant_id)
     return render_template("plant_detail.html", plant=plant)
 
-@plants_bp.route("/add_plant", methods=["GET", "POST"])
+@plants_bp.route("/add_plant_to_my_plants/<int:plant_id>", methods=["POST"])
 @login_required
-def add_plant():
-    if request.method == "POST":
-        name = request.form["name"]
-        location = request.form["location"]
-        watering_frequency = request.form["watering_frequency"]
-        fertilizing_frequency = request.form["fertilizing_frequency"]
-        common_issues = request.form.get("common_issues")
-
-        new_plant = Plant(
-            name=name,
-            location=location,
-            water_demand=watering_frequency,  # corrected attribute
-            fertilizing=fertilizing_frequency,  # corrected attribute
-            description=common_issues
-        )
-        db.session.add(new_plant)
-        db.session.commit()
-        flash("Plant added successfully!")
-        return redirect(url_for("plants.plants"))
-
-    return render_template("add_plant.html")
+def add_plant_to_my_plants(plant_id):
+    plant = Plant.query.get_or_404(plant_id)
+    new_customer_plant = CustomerPlant(customer_id=current_user.id, plant_id=plant.id)
+    db.session.add(new_customer_plant)
+    db.session.commit()
+    flash("Plant added to your list successfully!")
+    return redirect(url_for('plants.my_plants'))
 
 @plants_bp.route("/my_plants")
 @login_required
@@ -63,8 +49,8 @@ def add_new_plant():
         new_plant = Plant(
             name=name,
             location=location,
-            water_demand=watering_frequency,  # corrected attribute
-            fertilizing=fertilizing_frequency,  # corrected attribute
+            water_demand=watering_frequency,
+            fertilizing=fertilizing_frequency,
             description=common_issues
         )
         db.session.add(new_plant)
@@ -93,7 +79,7 @@ def add_task():
             task_type=task_type,
             task_date=task_date,
             is_completed=False,
-            amount=1.0  # Placeholder
+            amount=1.0  # Placeholder, adjust as needed
         )
         db.session.add(new_task)
         db.session.commit()
