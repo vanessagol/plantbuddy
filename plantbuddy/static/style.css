@@ -215,3 +215,16 @@ footer {
     max-width: 80%;
     height: auto;
 }
+
+/* Styles for the search button */
+.btn-search {
+    background-color: #7C993C;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #3f4a22;
+    color: white;  /* Ensure text color remains white on hover */
+}

@@ -4,20 +4,20 @@ from flask_login import login_required, current_user
 from datetime import datetime
 
 plants_bp = Blueprint('plants', __name__)
-@plants_bp.route("/")
+
 @plants_bp.route("/")
 def plants():
-    all_plants = Plant.query.all()
-    print("Database URI: ", db.engine.url)  # Print database URI
-    print("All Plants: ", all_plants)  # Detailed debugging line
-    for plant in all_plants:
-        print(f"Plant: {plant.name}, Photo: {plant.photo}")
+    search_query = request.args.get('search', '')
+    if search_query:
+        all_plants = Plant.query.filter(Plant.name.ilike(f'%{search_query}%')).all()
+    else:
+        all_plants = Plant.query.all()
+    
     return render_template("plants.html", plants=all_plants)
 
 @plants_bp.route("/plant/<int:plant_id>")
 def plant_detail(plant_id):
     plant = Plant.query.get_or_404(plant_id)
-    print(f"Plant Photo Path: {plant.photo}")  # Debugging line
     return render_template("plant_detail.html", plant=plant)
 
 @plants_bp.route("/add_plant", methods=["GET", "POST"])
@@ -93,7 +93,7 @@ def add_task():
             task_type=task_type,
             task_date=task_date,
             is_completed=False,
-            amount=1.0  # Placeholder, adjust as needed
+            amount=1.0  # Placeholder
         )
         db.session.add(new_task)
         db.session.commit()
