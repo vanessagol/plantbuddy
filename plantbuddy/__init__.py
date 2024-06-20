@@ -34,13 +34,13 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    from .auth import auth_bp
+    from .site.auth import auth_bp
     app.register_blueprint(auth_bp)
 
-    from .plant_management import plants_bp
+    from .site.plant_management import plants_bp
     app.register_blueprint(plants_bp, url_prefix='/plants')
 
-    from .routes import main_bp
+    from .site.routes import main_bp
     app.register_blueprint(main_bp)
 
     # Add the clear_flashes function to Jinja globals
