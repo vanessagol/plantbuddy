@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
-from .config import Config, s, client
-from .models import db, Customer
-from . import mail
+from ..config import Config, s, client
+from ..database.db import db, Customer
+from .. import mail
 import requests
 import json
 import os
 
-auth_bp = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth', __name__, template_folder="templates")
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():

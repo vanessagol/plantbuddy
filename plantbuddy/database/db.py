@@ -1,7 +1,9 @@
-from . import db
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
 from flask_login import UserMixin
+
+db = SQLAlchemy()
 
 class Customer(db.Model, UserMixin):
     __tablename__ = 'customers'

@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session
 from flask_mail import Message
 from datetime import datetime, timezone
-from .models import CareTask
-from . import mail
+from ..database.db import CareTask
+from .. import mail
 
-main_bp = Blueprint('main', __name__)
+main_bp = Blueprint('main', __name__, template_folder="templates")
 
 @main_bp.route("/")
 def index():

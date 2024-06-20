@@ -1,16 +1,18 @@
 from flask import Flask, session
-from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask_login import LoginManager
 from .config import init_app
 import os
+from .database.db import Customer
 
-db = SQLAlchemy()
+
 mail = Mail()
 login_manager = LoginManager()
 
 def create_app():
+    print("create app")
     app = Flask(__name__, instance_relative_config=True)
+    print("init app")
     init_app(app)
 
     # Set environment variable for development
@@ -21,30 +23,44 @@ def create_app():
         os.makedirs(app.instance_path, exist_ok=True)
     except OSError:
         pass
-
+    from .database import db
+    print("dbinit")
     db.init_app(app)
     mail.init_app(app)
+    print("loginit")
     login_manager.init_app(app)
+    print("r")
 
-    from .db.models import Customer
+    
+    print("dbimp")
     @login_manager.user_loader
     def load_user(user_id):
         return Customer.query.get(int(user_id))
+    
+    print("2")
 
     with app.app_context():
         db.create_all()
 
+    print("3")
+
     from .site.auth import auth_bp
+    print("31")
     app.register_blueprint(auth_bp)
+    print("32")
 
     from .site.plant_management import plants_bp
-    app.register_blueprint(plants_bp, url_prefix='/plants')
+    app.register_blueprint(plants_bp)
 
     from .site.routes import main_bp
     app.register_blueprint(main_bp)
 
+    print("4")
+
     # Add the clear_flashes function to Jinja globals
     app.jinja_env.globals.update(clear_flashes=clear_flashes)
+
+    print("Returning app")
 
     return app
 

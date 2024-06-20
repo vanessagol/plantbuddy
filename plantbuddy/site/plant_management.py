@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import db, Plant, CustomerPlant, CareTask
+from ..database.db import db, Plant, CustomerPlant, CareTask
 from flask_login import login_required, current_user
 from datetime import datetime
 
-plants_bp = Blueprint('plants', __name__)
+plants_bp = Blueprint('plants', __name__, url_prefix='/plants', template_folder="templates")
 
 @plants_bp.route("/")
 @plants_bp.route("/plants")
