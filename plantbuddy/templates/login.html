@@ -6,7 +6,16 @@
 <div class="login-container">
     <div class="login-form">
         <h2>Sign In</h2>
-        {% if not get_flashed_messages() %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                    {{ clear_flashes() }}
+                </div>
+            {% endif %}
+        {% endwith %}
         <form action="{{ url_for('auth.login') }}" method="POST">
             <div class="input-group">
                 <label for="email">Email Address</label>
@@ -29,7 +38,6 @@
                 </a>
             </div>
         </form>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

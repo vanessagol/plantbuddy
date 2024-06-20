@@ -18,19 +18,6 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <div class="flash">{{ message }}</div>
-                    {% endfor %}
-                </div>
-                {{ clear_flashes() }}
-            {% endif %}
-        {% endwith %}
-    </div>
-    
     {% block content %}
     {% endblock %}
     

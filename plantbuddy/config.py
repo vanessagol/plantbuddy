@@ -12,8 +12,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(INSTANCE_PATH, "plantbuddy.db")}'
     
     # SQLALCHEMY_DATABASE_URI = (
-    #     f"mysql+pymysql://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}"
-    #     f"@/{os.environ.get('DB_NAME')}?unix_socket=/cloudsql/{os.environ.get('plantbuddy-426722:us-central1:plantbuddy-mysql-instance')}"
+    #      f"mysql+pymysql://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}"
+    #      f"@/{os.environ.get('DB_NAME')}?unix_socket=/cloudsql/{os.environ.get('plantbuddy-426722:us-central1:plantbuddy-mysql-instance')}"
     # )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
