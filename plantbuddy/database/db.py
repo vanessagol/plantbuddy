@@ -1,7 +1,9 @@
-from . import db
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
 from flask_login import UserMixin
+
+db = SQLAlchemy()
 
 class Customer(db.Model, UserMixin):
     __tablename__ = 'customers'
@@ -29,9 +31,11 @@ class Plant(db.Model):
     name = db.Column(db.String(80), nullable=False)
     photo = db.Column(db.String(200), nullable=True)
     description = db.Column(db.Text, nullable=True)
-    placement = db.Column(db.String(50), nullable=True)  # Partial-shade, bright, sunny
-    water_demand = db.Column(db.String(50), nullable=True)  # Low, medium, high
+    light = db.Column(db.String(50), nullable=True)  # Updated from placement
+    humidity = db.Column(db.String(50), nullable=True)  # Updated from water_demand
     fertilizing = db.Column(db.String(50), nullable=True)  # weekly, monthly, -
+    toxicity = db.Column(db.String(200), nullable=True)
+    watering_frequency = db.Column(db.String(10), nullable=True)  # 1x, 2x, 5x
 
     customer_plants = db.relationship("CustomerPlant", back_populates="plant")
     care_tasks = db.relationship('CareTask', back_populates='plant')

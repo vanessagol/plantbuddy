@@ -12,7 +12,7 @@
                     <a class="nav-item nav-link {% if request.endpoint == 'plants.plants' %}active{% endif %}" href="{{ url_for('plants.plants') }}">Plants</a>
                     <a class="nav-item nav-link {% if request.endpoint == 'main.contact_us' %}active{% endif %}" href="{{ url_for('main.contact_us') }}">Contact Us</a>
                     {% if current_user.is_admin %}
-                        <a class="nav-item nav-link" href="{{ url_for('admin') }}">Admin</a>
+                        <a class="nav-item nav-link" href="">Admin</a>
                     {% endif %}
                     <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                 {% else %}

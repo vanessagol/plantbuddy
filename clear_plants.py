@@ -1,5 +1,5 @@
 from plantbuddy import create_app, db
-from plantbuddy.models import Plant
+from plantbuddy.db.models import Plant
 
 app = create_app()
 

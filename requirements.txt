@@ -1,12 +1,12 @@
 APScheduler
 
-Flask==2.0.2
-Flask-Login==0.5.0
-Flask-Mail==0.9.1
-Flask-SQLAlchemy==2.5.1
-oauthlib==3.1.1
-itsdangerous==2.0.1
-requests==2.26.0
-python-dotenv==0.19.1
-Werkzeug==2.0.3
-SQLAlchemy==1.4.32
+Flask
+Flask-Login
+Flask-Mail
+Flask-SQLAlchemy
+oauthlib
+itsdangerous
+requests
+python-dotenv
+Werkzeug
+SQLAlchemy
