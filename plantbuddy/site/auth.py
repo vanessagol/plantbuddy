@@ -62,6 +62,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    session.pop('_flashes', None)
     flash("You have been logged out.")
     return redirect(url_for("main.home"))
 
