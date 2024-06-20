@@ -26,7 +26,7 @@ def create_app():
     mail.init_app(app)
     login_manager.init_app(app)
 
-    from .models import Customer
+    from .db.models import Customer
     @login_manager.user_loader
     def load_user(user_id):
         return Customer.query.get(int(user_id))

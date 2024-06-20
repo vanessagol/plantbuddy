@@ -1,5 +1,5 @@
 from plantbuddy import create_app, db
-from plantbuddy.models import Plant, Customer, BlogPost
+from plantbuddy.db.models import Plant, Customer, BlogPost
 from werkzeug.security import generate_password_hash
 import os
 

@@ -1,6 +1,6 @@
 from flask import render_template, url_for
 from flask_mail import Message
-from .models import Customer, CustomerPlant, CareTask
+from .db.models import Customer, CustomerPlant, CareTask
 from . import mail, db
 from datetime import datetime, timedelta
 
