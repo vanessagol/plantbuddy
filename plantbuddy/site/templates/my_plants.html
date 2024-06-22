@@ -18,19 +18,23 @@
             <h2>{{ user_plant.plant.name }}</h2>
             <p>Last Watered: {{ user_plant.last_watered_date.strftime('%Y-%m-%d') if user_plant.last_watered_date else 'Never' }}</p>
             <a href="{{ url_for('plants.plant_detail', plant_id=user_plant.plant.id) }}" class="button">Details</a>
+            <form action="{{ url_for('plants.delete_plant', plant_id=user_plant.plant.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="button button-delete">Delete</button>
+            </form>
         </div>
         {% endfor %}
     </div>
     <div class="text-center">
         <a href="{{ url_for('plants.plants') }}" class="button">Back to All Plants</a>
     </div>
+    <br><br>
     <h5 class="text-center">Care Tasks</h5>
+    <br><br>
     <div class="tasks-container text-center">
         {% for task in tasks %}
         <div class="task-card">
             <h3>{{ task.task_type }} for {{ task.plant.name }}</h3>
-            <p>Task Date: {{ task.task_date.strftime('%Y-%m-%d') }}</p>
-            <p>Amount: {{ task.amount }}</p>
+            <p>Task Date: {{ task.task_date.strftime('%Y-%m-%d %H:%M') }}</p>
             <form action="{{ url_for('plants.complete_task', task_id=task.id) }}" method="post">
                 <button type="submit" class="button">Mark as Completed</button>
             </form>

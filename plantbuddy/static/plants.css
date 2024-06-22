@@ -46,19 +46,32 @@
     display: block;
 }
 
+/* General button styles */
 .button {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
-    background-color: #7c993c;
-    color: white;
-    text-decoration: none;
+    background-color: #7c993c; /* Green color */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
     border-radius: 5px;
+    border: none; /* Remove border */
+    cursor: pointer;
 }
 
 .button:hover {
-    background-color: #3f4a22;
-    color: white;  /* Ensure text color remains white on hover */
+    background-color: #3f4a22; /* Darker green on hover */
+}
+
+/* Delete button specific styles */
+.button-delete {
+    background-color: #dc3545; /* Red color for delete button */
+    color: white; /* Ensure text is white */
+}
+
+.button-delete:hover {
+    background-color: #a71d2a; /* Darker red on hover */
+    color: white; /* Ensure text remains white on hover */
 }
 
 .btn-custom {
