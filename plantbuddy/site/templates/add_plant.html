@@ -4,36 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Plant</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body class="add-plant-page">
-    <h1>Add Plant</h1>
-    <form action="{{ url_for('plants.add_new_plant') }}" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
-        <label for="photo">Photo URL:</label>
-        <input type="text" id="photo" name="photo" required>
-        <br>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-        <br>
-        <label for="light">Light:</label>
-        <input type="text" id="light" name="light" required>
-        <br>
-        <label for="humidity">Humidity:</label>
-        <input type="text" id="humidity" name="humidity" required>
-        <br>
-        <label for="fertilizing">Fertilizing:</label>
-        <input type="text" id="fertilizing" name="fertilizing" required>
-        <br>
-        <label for="toxicity">Toxicity:</label>
-        <input type="text" id="toxicity" name="toxicity" required>
-        <br>
-        <label for="watering_frequency">Watering Frequency (e.g., 1x, 2x):</label>
-        <input type="text" id="watering_frequency" name="watering_frequency" required>
-        <br>
-        <button type="submit">Add Plant</button>
-    </form>
+    {% include 'header.html' %}
+    <main class="container mt-4">
+        <h1>Add Plant</h1>
+        <form action="{{ url_for('plants.add_new_plant') }}" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Photo URL:</label>
+                <input type="text" id="photo" name="photo" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="light">Light:</label>
+                <input type="text" id="light" name="light" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="humidity">Humidity:</label>
+                <input type="text" id="humidity" name="humidity" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="fertilizing">Fertilizing:</label>
+                <input type="text" id="fertilizing" name="fertilizing" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="toxicity">Toxicity:</label>
+                <input type="text" id="toxicity" name="toxicity" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="watering_frequency">Watering Frequency (e.g., 1x, 2x):</label>
+                <input type="text" id="watering_frequency" name="watering_frequency" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-custom">Add Plant</button>
+        </form>
+    </main>
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>

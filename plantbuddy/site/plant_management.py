@@ -39,6 +39,10 @@ def my_plants():
 @plants_bp.route("/add", methods=["GET", "POST"])
 @login_required
 def add_new_plant():
+    if not current_user.is_admin:
+        flash("You do not have permission to add new plants.")
+        return redirect(url_for('plants.plants'))
+        
     if request.method == "POST":
         name = request.form["name"]
         photo = request.form["photo"]

@@ -10,12 +10,15 @@
                 
                 {% if current_user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if request.endpoint in ['plants.plants', 'plants.my_plants'] %}active{% endif %}" href="#" id="plantsDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {% if request.endpoint in ['plants.plants', 'plants.my_plants', 'plants.add_new_plant'] %}active{% endif %}" href="#" id="plantsDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Plants
                         </a>
                         <div class="dropdown-menu" aria-labelledby="plantsDropdownMenuLink">
                             <a class="dropdown-item" href="{{ url_for('plants.plants') }}">Plants</a>
                             <a class="dropdown-item" href="{{ url_for('plants.my_plants') }}">My Plants</a>
+                            {% if current_user.is_admin %}
+                                <a class="dropdown-item" href="{{ url_for('plants.add_new_plant') }}">Add Plant</a>
+                            {% endif %}
                         </div>
                     </li>
 
