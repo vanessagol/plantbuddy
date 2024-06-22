@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>{{ post.title }}</title>
+    <title>Approve Blog Post</title>
 </head>
 <body>
     {% include 'header.html' %}
     <main class="container mt-4">
-        <h1>{{ post.title }}</h1>
-        <p>by {{ post.author.username }}</p>
-        <div>
-            {{ post.content }}
+        <h1>Approve Blog Post</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                <form action="{{ url_for('main.approve_blog', post_id=post.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-primary">Approve</button>
+                </form>
+                <form action="{{ url_for('main.delete_blog', post_id=post.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
         </div>
-        <br>
-        <a href="{{ url_for('main.blog') }}" class="btn btn-primary">Zurück zu Blogeinträgen</a>
-        {% if current_user.is_admin or current_user.id == post.author_id %}
-            <form action="{{ url_for('main.delete_blog', post_id=post.id) }}" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Löschen</button>
-            </form>
-        {% endif %}
     </main>
     {% include 'footer.html' %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

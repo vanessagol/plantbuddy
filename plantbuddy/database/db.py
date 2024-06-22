@@ -31,11 +31,11 @@ class Plant(db.Model):
     name = db.Column(db.String(80), nullable=False)
     photo = db.Column(db.String(200), nullable=True)
     description = db.Column(db.Text, nullable=True)
-    light = db.Column(db.String(50), nullable=True)  # Updated from placement
-    humidity = db.Column(db.String(50), nullable=True)  # Updated from water_demand
+    light = db.Column(db.String(50), nullable=True)
+    humidity = db.Column(db.String(50), nullable=True)  #water-demand
     fertilizing = db.Column(db.String(50), nullable=True)  # weekly, monthly, -
     toxicity = db.Column(db.String(200), nullable=True)
-    watering_frequency = db.Column(db.String(10), nullable=True)  # 1x, 2x, 5x
+    watering_frequency = db.Column(db.String(10), nullable=True)  # 1x, 2x, 5x per week
 
     customer_plants = db.relationship("CustomerPlant", back_populates="plant")
     care_tasks = db.relationship('CareTask', back_populates='plant')
@@ -63,7 +63,6 @@ class CareTask(db.Model):
     task_type = db.Column(db.String(50), nullable=False)  # 'Water' or 'Fertilize'
     task_date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     is_completed = db.Column(db.Boolean, default=False)
-    amount = db.Column(db.Float, nullable=False)
 
     plant = db.relationship('Plant', back_populates='care_tasks')
 
@@ -82,3 +81,4 @@ class BlogPost(db.Model):
 
     def __repr__(self):
         return f'<BlogPost {self.title} by {self.author.username}>'
+

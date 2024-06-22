@@ -245,3 +245,14 @@ footer {
     color: white;
 }
 
+.btn-primary {
+    background-color: #7c993c;
+    border-color: #7c993c;
+}
+
+.btn-primary:hover {
+    background-color: #3f4a22;
+    border-color: #3f4a22;
+}
+
+

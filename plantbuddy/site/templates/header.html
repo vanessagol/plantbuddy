@@ -7,13 +7,33 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link {% if request.endpoint == 'main.home' %}active{% endif %}" href="{{ url_for('main.home') }}">Home</a>
-                <a class="nav-item nav-link {% if request.endpoint == 'main.blog' %}active{% endif %}" href="{{ url_for('main.blog') }}">Blog</a>
+                
                 {% if current_user.is_authenticated %}
-                    <a class="nav-item nav-link {% if request.endpoint == 'plants.plants' %}active{% endif %}" href="{{ url_for('plants.plants') }}">Plants</a>
-                    <a class="nav-item nav-link {% if request.endpoint == 'main.contact_us' %}active{% endif %}" href="{{ url_for('main.contact_us') }}">Contact Us</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if request.endpoint in ['plants.plants', 'plants.my_plants'] %}active{% endif %}" href="#" id="plantsDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Plants
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="plantsDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url_for('plants.plants') }}">Plants</a>
+                            <a class="dropdown-item" href="{{ url_for('plants.my_plants') }}">My Plants</a>
+                        </div>
+                    </li>
+
                     {% if current_user.is_admin %}
-                        <a class="nav-item nav-link" href="">Admin</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if request.endpoint in ['main.blog', 'main.admin_approval'] %}active{% endif %}" href="#" id="blogDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Blog
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="blogDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ url_for('main.blog') }}">Blog</a>
+                                <a class="dropdown-item" href="{{ url_for('main.admin_approval') }}">Admin Approval</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <a class="nav-item nav-link {% if request.endpoint == 'main.blog' %}active{% endif %}" href="{{ url_for('main.blog') }}">Blog</a>
                     {% endif %}
+                    
+                    <a class="nav-item nav-link {% if request.endpoint == 'main.contact_us' %}active{% endif %}" href="{{ url_for('main.contact_us') }}">Contact Us</a>
                     <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link {% if request.endpoint == 'main.contact_us' %}active{% endif %}" href="{{ url_for('main.contact_us') }}">Contact Us</a>

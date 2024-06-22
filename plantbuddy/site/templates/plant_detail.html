@@ -16,10 +16,12 @@
         <div class="plant-detail-info">
             <h1>{{ plant.name }}</h1>
             <p>{{ plant.description }}</p>
-            <p><strong>Placement:</strong> {{ plant.placement }}</p>
-            <p><strong>Water Demand:</strong> {{ plant.water_demand }}</p>
-            <p><strong>Fertilizing:</strong> {{ plant.fertilizing }}</p>
-            <a href="{{ url_for('plants.plants') }}" class="button">Back to All Plants</a>
+            <p><strong>Licht:</strong> {{ plant.light }}</p>
+            <p><strong>Feuchtigkeit:</strong> {{ plant.humidity }}</p>
+            <p><strong>Düngung:</strong> {{ plant.fertilizing }}</p>
+            <p><strong>Toxizität:</strong> {{ plant.toxicity }}</p>
+            <p><strong>Bewässerungshäufigkeit (pro Woche):</strong> {{ plant.watering_frequency }}</p>
+            <a href="{{ url_for('plants.plants') }}" class="button">Zurück zu allen Pflanzen</a>
         </div>
     </div>
     {% include 'footer.html' %}
