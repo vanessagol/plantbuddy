@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session
 from flask_mail import Message
 from datetime import datetime, timezone
-from ..database.db import CareTask
+from ..database.db import CareTask, BlogPost
 from .. import mail
 
 main_bp = Blueprint('main', __name__, template_folder="templates")
@@ -14,10 +14,15 @@ def index():
 def home():
     return render_template("home.html")
 
-# @main_bp.route("/blog")
-# def blog():
-#     # posts = BlogPost.query.all()  # Fetch all blog posts from the database
-#     return render_template("blog.html", posts=posts)
+@main_bp.route("/blog")
+def blog():
+    posts = BlogPost.query.all() 
+    return render_template("blog.html", posts=posts)
+
+@main_bp.route("/blog/post/<int:post_id>")
+def post_detail(post_id):
+    post = BlogPost.query.get_or_404(post_id)
+    return render_template("post_detail.html", post=post)
 
 @main_bp.route("/contact_us")
 def contact_us():

@@ -23,6 +23,7 @@ def create_app():
         os.makedirs(app.instance_path, exist_ok=True)
     except OSError:
         pass
+
     from .database import db
     db.init_app(app)
     mail.init_app(app)
@@ -31,7 +32,6 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return Customer.query.get(int(user_id))
-
 
     with app.app_context():
         db.create_all()

@@ -228,3 +228,20 @@ footer {
     background-color: #3f4a22;
     color: white;  /* Ensure text color remains white on hover */
 }
+
+/* Custom green button */
+.btn-custom {
+    background-color: #7c993c; /* Green color */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #3f4a22; /* Darker green on hover */
+    color: white;
+}
+

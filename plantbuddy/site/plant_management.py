@@ -8,8 +8,12 @@ plants_bp = Blueprint('plants', __name__, url_prefix='/plants', template_folder=
 @plants_bp.route("/")
 @plants_bp.route("/plants")
 def plants():
-    all_plants = Plant.query.all()
-    return render_template("plants.html", plants=all_plants)
+    search_term = request.args.get('search', '')
+    if search_term:
+        all_plants = Plant.query.filter(Plant.name.ilike(f'%{search_term}%')).all()
+    else:
+        all_plants = Plant.query.all()
+    return render_template("plants.html", plants=all_plants, search_term=search_term)
 
 @plants_bp.route("/plant/<int:plant_id>")
 def plant_detail(plant_id):
